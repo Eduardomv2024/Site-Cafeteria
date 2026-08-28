@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrinho — Café Dalí</title>
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="img/favicon-180.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand"><img src="img/logo.png" alt="Café Dalí" /></a>
+      <nav class="nav">
+        <a href="index.html">Início</a>
+        <a href="encomendas.html">Encomendas</a>
+        <a href="index.html#como-funciona">Como funciona</a>
+        <a href="index.html#contato">Contato</a>
+        <a href="carrinho.html" class="nav-cart">🛒 Carrinho <span class="cart-count" data-cart-count>0</span></a>
+      </nav>
+      <button class="nav-toggle" aria-label="Abrir menu">☰</button>
+    </div>
+  </header>
+
+  <section class="section-tight section-alt">
+    <div class="container text-center">
+      <span class="eyebrow">Seu pedido</span>
+      <h1 style="margin-bottom:0;">Carrinho</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <div id="cart-empty" class="empty-cart" style="display:none;">
+        <h2>Seu carrinho está vazio</h2>
+        <p>Adicione tortas, docinhos ou folhados do nosso catálogo.</p>
+        <a href="encomendas.html" class="btn btn-primary">Ver encomendas</a>
+      </div>
+
+      <div class="cart-layout" id="cart-summary-wrap" style="display:none;">
+        <div>
+          <div id="cart-list"></div>
+        </div>
+
+        <div class="summary-card">
+          <h3 style="margin-bottom:18px;">Finalizar pedido</h3>
+
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="cart-subtotal">R$ 0,00</span>
+          </div>
+          <div class="summary-row summary-total">
+            <span>Total</span>
+            <span id="cart-total">R$ 0,00</span>
+          </div>
+
+          <form id="checkout-form" style="margin-top:24px;" novalidate>
+            <div class="form-group">
+              <label for="nomeCliente">Nome completo</label>
+              <input type="text" id="nomeCliente" name="nomeCliente" placeholder="Seu nome" />
+              <div class="field-error" id="error-nomeCliente">Informe seu nome.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="telefoneCliente">WhatsApp / telefone</label>
+              <input type="tel" id="telefoneCliente" name="telefoneCliente" placeholder="(48) 90000-0000" />
+              <div class="field-error" id="error-telefoneCliente">Informe um telefone de contato.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="data-retirada">Data desejada</label>
+              <input type="date" id="data-retirada" name="dataRetirada" />
+              <div class="hint">Pedidos precisam de no mínimo 48h de antecedência.</div>
+              <div class="field-error" id="error-dataRetirada">Escolha uma data.</div>
+              <div class="field-error" id="error-dataRetirada-min">A data precisa ser pelo menos 48h a partir de agora.</div>
+            </div>
+
+            <div class="form-group">
+              <label>Retirada ou entrega?</label>
+              <div class="radio-row">
+                <label><input type="radio" name="entrega-tipo" value="retirada" checked /> Retirada no local</label>
+                <label><input type="radio" name="entrega-tipo" value="entrega" /> Entrega</label>
+              </div>
+            </div>
+
+            <div class="form-group" id="endereco-wrap" style="display:none;">
+              <label for="enderecoEntrega">Endereço para entrega</label>
+              <input type="text" id="enderecoEntrega" name="enderecoEntrega" placeholder="Rua, número, bairro" />
+              <div class="hint">A taxa e a disponibilidade de entrega serão confirmadas com você.</div>
+              <div class="field-error" id="error-enderecoEntrega">Informe o endereço de entrega.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="observacoes">Observações (opcional)</label>
+              <textarea id="observacoes" name="observacoes" rows="3" placeholder="Alguma personalização ou detalhe do pedido?"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Finalizar pedido</button>
+            <div id="checkout-status" class="checkout-status"></div>
+            <p class="hint" style="margin-top:14px; text-align:center;">Pagamento processado via Mercado Pago (Pix, cartão ou boleto). Se o pagamento online não estiver disponível, seu pedido será enviado por WhatsApp.</p>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <img src="img/logo.png" alt="Café Dalí" />
+          <p>Tortas, docinhos e folhados artesanais, feitos sob encomenda em Florianópolis.</p>
+        </div>
+        <div>
+          <h4>Contato</h4>
+          <a href="https://wa.me/5548988410415" target="_blank">WhatsApp (48) 98841-0415</a>
+          <a href="mailto:contato@cafeteriadali.com.br">contato@cafeteriadali.com.br</a>
+          <a href="https://instagram.com/dalicafeteria" target="_blank">@dalicafeteria</a>
+        </div>
+        <div>
+          <h4>Onde estamos</h4>
+          <p>Rua Lauro Linhares, 2055<br />Trindade, Florianópolis - SC<br />88036-003</p>
+          <p>Todos os dias, 8h às 19h</p>
+        </div>
+      </div>
+      <div class="footer-bottom">© 2026 Café Dalí. Todos os direitos reservados.</div>
+    </div>
+  </footer>
+
+  <script src="js/catalogo-loader.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/checkout.js"></script>
+</body>
+</html>

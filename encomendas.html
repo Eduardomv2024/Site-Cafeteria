@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Encomendas — Café Dalí</title>
+  <meta name="description" content="Catálogo de tortas, docinhos e folhados do Café Dalí para encomenda, com pelo menos 48h de antecedência." />
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="img/favicon-180.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand"><img src="img/logo.png" alt="Café Dalí" /></a>
+      <nav class="nav">
+        <a href="index.html">Início</a>
+        <a href="encomendas.html">Encomendas</a>
+        <a href="index.html#como-funciona">Como funciona</a>
+        <a href="index.html#contato">Contato</a>
+        <a href="carrinho.html" class="nav-cart">🛒 Carrinho <span class="cart-count" data-cart-count>0</span></a>
+      </nav>
+      <button class="nav-toggle" aria-label="Abrir menu">☰</button>
+    </div>
+  </header>
+
+  <section class="section-tight section-alt">
+    <div class="container text-center">
+      <span class="eyebrow">Catálogo</span>
+      <h1 style="margin-bottom:8px;">Encomendas</h1>
+      <p style="max-width:560px; margin:0 auto; color:var(--color-text-muted);">Escolha os itens, adicione ao carrinho e finalize com pelo menos 48h de antecedência.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="note-box">
+        <strong>Antes de pedir:</strong> encomendas precisam de no mínimo 48h de antecedência (o prazo pode variar conforme o item e a quantidade). Retirada no Café Dalí ou entrega a combinar. Quantidade mínima por pedido pode se aplicar a alguns itens — confirmamos com você antes de fechar o pedido.
+      </div>
+
+      <div class="category-nav" id="category-nav"></div>
+
+      <div id="catalogo"></div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <img src="img/logo.png" alt="Café Dalí" />
+          <p>Tortas, docinhos e folhados artesanais, feitos sob encomenda em Florianópolis.</p>
+        </div>
+        <div>
+          <h4>Contato</h4>
+          <a href="https://wa.me/5548988410415" target="_blank">WhatsApp (48) 98841-0415</a>
+          <a href="mailto:contato@cafeteriadali.com.br">contato@cafeteriadali.com.br</a>
+          <a href="https://instagram.com/dalicafeteria" target="_blank">@dalicafeteria</a>
+        </div>
+        <div>
+          <h4>Onde estamos</h4>
+          <p>Rua Lauro Linhares, 2055<br />Trindade, Florianópolis - SC<br />88036-003</p>
+          <p>Todos os dias, 8h às 19h</p>
+        </div>
+      </div>
+      <div class="footer-bottom">© 2026 Café Dalí. Todos os direitos reservados.</div>
+    </div>
+  </footer>
+
+  <a class="whatsapp-fab" href="https://wa.me/5548988410415" target="_blank" aria-label="Falar no WhatsApp">💬</a>
+
+  <script src="js/catalogo-loader.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/catalogo.js"></script>
+</body>
+</html>

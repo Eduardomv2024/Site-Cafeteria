@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pedido confirmado — Café Dalí</title>
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand"><img src="img/logo.png" alt="Café Dalí" /></a>
+      <nav class="nav">
+        <a href="index.html">Início</a>
+        <a href="encomendas.html">Encomendas</a>
+        <a href="carrinho.html" class="nav-cart">🛒 Carrinho <span class="cart-count" data-cart-count>0</span></a>
+      </nav>
+      <button class="nav-toggle" aria-label="Abrir menu">☰</button>
+    </div>
+  </header>
+
+  <section class="result-page">
+    <div>
+      <div class="result-icon">🎉</div>
+      <h1>Pedido confirmado!</h1>
+      <p>Recebemos seu pagamento. Em breve entraremos em contato para confirmar os detalhes da retirada ou entrega.</p>
+      <div class="result-actions">
+        <a href="https://wa.me/5548988410415" target="_blank" class="btn btn-primary">Falar no WhatsApp</a>
+        <a href="index.html" class="btn btn-outline">Voltar ao início</a>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/catalogo-loader.js"></script>
+  <script>localStorage.removeItem("dalicafe_carrinho");</script>
+  <script src="js/cart.js"></script>
+</body>
+</html>

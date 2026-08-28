@@ -1,0 +1,9 @@
+{
+  "name": "cafe-dali-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Site de encomendas do Café Dalí (site estático + Netlify Functions).",
+  "dependencies": {
+    "@netlify/blobs": "^11.0.2"
+  }
+}

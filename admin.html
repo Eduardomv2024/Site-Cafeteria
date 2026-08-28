@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel de Produtos (uso interno) — Café Dalí</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .admin-wrap { max-width: 920px; margin: 0 auto; padding: 40px 24px 100px; }
+    .admin-steps {
+      background: var(--color-cream-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 22px 26px;
+      margin-bottom: 32px;
+      font-size: 0.94rem;
+    }
+    .admin-steps ol { margin: 10px 0 0; padding-left: 20px; }
+    .admin-steps li { margin-bottom: 6px; }
+    .admin-cat {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 28px;
+    }
+    .admin-cat-header {
+      display: flex;
+      gap: 14px;
+      align-items: flex-end;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .admin-cat-header .form-group { flex: 1; min-width: 200px; margin-bottom: 0; }
+    .admin-item {
+      display: grid;
+      grid-template-columns: 1.4fr 2fr 0.7fr 0.9fr auto;
+      gap: 10px;
+      align-items: start;
+      padding: 14px 0;
+      border-top: 1px solid var(--color-border);
+    }
+    .admin-item:first-of-type { border-top: none; }
+    .admin-item input, .admin-item textarea {
+      width: 100%;
+      padding: 9px 11px;
+      border-radius: 8px;
+      border: 1.5px solid var(--color-border);
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+    }
+    .admin-item textarea { resize: vertical; min-height: 40px; }
+    .admin-remove {
+      background: none;
+      border: none;
+      color: var(--color-red);
+      cursor: pointer;
+      font-size: 1.3rem;
+      line-height: 1;
+      padding: 6px;
+    }
+    .admin-col-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--color-text-muted);
+      margin-bottom: 4px;
+      display: block;
+    }
+    .admin-add-btn {
+      margin-top: 14px;
+      background: none;
+      border: 1.5px dashed var(--color-border);
+      color: var(--color-text);
+      padding: 10px 16px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+      width: 100%;
+    }
+    .admin-add-btn:hover { background: var(--color-cream-2); }
+    .admin-actions {
+      position: sticky;
+      bottom: 0;
+      background: var(--color-cream);
+      border-top: 1px solid var(--color-border);
+      padding: 18px 0;
+      margin-top: 10px;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .admin-status { font-size: 0.88rem; color: var(--color-text-muted); }
+    .admin-cat-remove {
+      background: none;
+      border: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      border-radius: 8px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 0.82rem;
+    }
+    .admin-cat-remove:hover { color: var(--color-red); border-color: var(--color-red); }
+    @media (max-width: 760px) {
+      .admin-item { grid-template-columns: 1fr; }
+      .admin-remove { justify-self: end; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand"><img src="img/logo.png" alt="Café Dalí" /></a>
+      <nav class="nav">
+        <a href="index.html">Início</a>
+        <a href="encomendas.html">Encomendas</a>
+        <a href="admin.html">Painel de produtos</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Abrir menu">☰</button>
+    </div>
+  </header>
+
+  <div class="admin-wrap">
+    <span class="eyebrow">Uso interno</span>
+    <h1>Painel de produtos</h1>
+    <p style="color:var(--color-text-muted);">Edite os produtos do catálogo de encomendas aqui. Essa página não aparece para os clientes.</p>
+
+    <div class="admin-steps">
+      <strong>Como usar (sem precisar programar):</strong>
+      <ol>
+        <li>Edite, adicione ou remova produtos abaixo.</li>
+        <li>Digite sua senha do painel no campo abaixo.</li>
+        <li>Clique em <strong>"Salvar alterações no site"</strong> — pronto, já vale no site na mesma hora, sem precisar publicar nada de novo.</li>
+      </ol>
+    </div>
+
+    <div id="categories">
+      <p class="admin-status">Carregando produtos...</p>
+    </div>
+
+    <button class="admin-add-btn" id="add-category" type="button">+ Adicionar nova categoria (ex: Bolos, Biscoitos...)</button>
+
+    <div class="admin-actions">
+      <div class="form-group" style="margin-bottom:0; min-width:200px;">
+        <label for="admin-password">Senha do painel</label>
+        <input type="password" id="admin-password" placeholder="Digite a senha" autocomplete="current-password" />
+      </div>
+      <button class="btn btn-primary" id="save-btn" type="button">💾 Salvar alterações no site</button>
+      <span class="admin-status" id="admin-status"></span>
+    </div>
+  </div>
+
+  <script src="js/cart.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
