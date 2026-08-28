@@ -68,9 +68,10 @@ exports.handler = async (event) => {
     await store.setJSON("produtos", payload);
     return { statusCode: 200, body: JSON.stringify({ ok: true }) };
   } catch (err) {
+    console.error("save-products falhou:", err);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Falha ao salvar no Netlify Blobs.", details: String(err) }),
+      body: JSON.stringify({ error: "Falha ao salvar no Netlify Blobs.", details: String(err && err.message ? err.message : err) }),
     };
   }
 };

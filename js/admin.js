@@ -73,6 +73,15 @@ function categoryHTML(catKey, cat) {
 function itemHTML(catKey, item, idx) {
   return `
     <div class="admin-item" data-cat="${catKey}" data-idx="${idx}">
+      <div class="admin-img-cell">
+        <span class="admin-col-label">Foto</span>
+        <div class="admin-img-preview">
+          ${item.imagem ? `<img src="${item.imagem}" alt="" />` : `<span class="admin-img-empty">sem foto</span>`}
+        </div>
+        <input type="file" accept="image/*" data-img-input style="display:none" />
+        <button type="button" class="admin-img-btn" data-img-trigger>${item.imagem ? "Trocar" : "Escolher"}</button>
+        ${item.imagem ? `<button type="button" class="admin-img-remove" data-img-remove>Remover foto</button>` : ""}
+      </div>
       <div>
         <span class="admin-col-label">Nome</span>
         <input type="text" data-field="nome" value="${escapeAttr(item.nome)}" placeholder="Ex: Torta de Chocolate" />
@@ -161,6 +170,67 @@ function attachEvents() {
       state[catKey].itens.splice(idx, 1);
       render();
     });
+
+    // foto do produto
+    const imgInput = row.querySelector("[data-img-input]");
+    const imgTrigger = row.querySelector("[data-img-trigger]");
+    const imgRemoveBtn = row.querySelector("[data-img-remove]");
+    if (imgTrigger) {
+      imgTrigger.addEventListener("click", () => imgInput.click());
+    }
+    if (imgInput) {
+      imgInput.addEventListener("change", async () => {
+        const file = imgInput.files[0];
+        if (!file) return;
+        setStatus("Processando imagem...");
+        try {
+          const dataUrl = await compressImageFile(file, 640, 0.7);
+          state[catKey].itens[idx].imagem = dataUrl;
+          render();
+          setStatus('Foto adicionada. Não esqueça de clicar em "Salvar alterações no site".');
+        } catch (e) {
+          setStatus("Não foi possível processar essa imagem. Tente outra foto.");
+        }
+      });
+    }
+    if (imgRemoveBtn) {
+      imgRemoveBtn.addEventListener("click", () => {
+        delete state[catKey].itens[idx].imagem;
+        render();
+      });
+    }
+  });
+}
+
+function compressImageFile(file, maxDim, quality) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+        if (width > maxDim || height > maxDim) {
+          if (width > height) {
+            height = Math.round((height * maxDim) / width);
+            width = maxDim;
+          } else {
+            width = Math.round((width * maxDim) / height);
+            height = maxDim;
+          }
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL("image/jpeg", quality));
+      };
+      img.onerror = () => reject(new Error("Não foi possível ler a imagem"));
+      img.src = reader.result;
+    };
+    reader.onerror = () => reject(new Error("Não foi possível ler o arquivo"));
+    reader.readAsDataURL(file);
   });
 }
 
@@ -230,7 +300,8 @@ document.getElementById("save-btn").addEventListener("click", async () => {
     }
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
-      throw new Error(data.error || "status " + res.status);
+      const base = data.error || "status " + res.status;
+      throw new Error(data.details ? `${base} — ${data.details}` : base);
     }
 
     const skippedNote = skipped > 0 ? ` (${skipped} produto${skipped > 1 ? "s" : ""} em branco foi${skipped > 1 ? "ram" : ""} ignorado${skipped > 1 ? "s" : ""})` : "";

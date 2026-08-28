@@ -3,9 +3,12 @@
    ========================================================================== */
 
 function productCardHTML(p) {
+  const media = p.imagem
+    ? `<img src="${p.imagem}" alt="${p.nome}" loading="lazy" />`
+    : p.nome;
   return `
     <div class="product-card">
-      <div class="product-media">${p.nome}</div>
+      <div class="product-media">${media}</div>
       <div class="product-body">
         <h3>${p.nome}</h3>
         <p class="product-desc">${p.descricao}</p>

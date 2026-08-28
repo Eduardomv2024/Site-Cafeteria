@@ -26,6 +26,7 @@ exports.handler = async () => {
   } catch (err) {
     // Se o Netlify Blobs falhar por qualquer motivo, o site continua no ar
     // mostrando o catálogo de exemplo em vez de quebrar a página.
+    console.error("get-products falhou, usando catalogo padrao:", err);
     return {
       statusCode: 200,
       headers: { "content-type": "application/json; charset=utf-8" },
