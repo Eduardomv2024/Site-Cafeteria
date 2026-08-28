@@ -1,0 +1,53 @@
+{
+  "contato": {
+    "whatsapp": "5548988410415",
+    "whatsappDisplay": "(48) 98841-0415",
+    "email": "contato@cafeteriadali.com.br",
+    "instagramUrl": "https://instagram.com/dalicafeteria",
+    "instagramHandle": "@dalicafeteria"
+  },
+  "endereco": {
+    "linha1": "Rua Lauro Linhares, 2055",
+    "linha2": "Trindade, Florianópolis - SC",
+    "cep": "88036-003"
+  },
+  "horario": {
+    "texto": "Todos os dias, das 8h às 19h"
+  },
+  "hero": {
+    "eyebrow": "Encomendas artesanais",
+    "titulo": "Tortas, docinhos e folhados feitos com o toque surrealista do Café Dalí",
+    "subtitulo": "Receitas autorais, ingredientes selecionados e aquele capricho de confeitaria de bairro — pedidos com 48h de antecedência para retirada ou entrega em Florianópolis.",
+    "imagem": "img/hero-dali.jpg"
+  },
+  "comoFunciona": {
+    "eyebrow": "Como funciona",
+    "titulo": "Encomendar é simples",
+    "subtitulo": "Do catálogo até a retirada, em três passos.",
+    "passos": [
+      { "titulo": "Escolha seus produtos", "texto": "Navegue pelo catálogo de tortas, docinhos e folhados e monte seu pedido." },
+      { "titulo": "Finalize com antecedência", "texto": "Escolha a data de retirada ou entrega — pedidos precisam de no mínimo 48h de antecedência." },
+      { "titulo": "Retire ou receba", "texto": "Buscar no próprio Café Dalí ou combinar entrega, conforme a opção escolhida no pedido." }
+    ]
+  },
+  "galeria": {
+    "eyebrow": "Nosso espaço",
+    "titulo": "Um cantinho surrealista em Florianópolis",
+    "subtitulo": "Conheça um pouco do ambiente do Café Dalí, na Trindade.",
+    "fotos": [
+      { "imagem": "img/fachada-balcao.jpg", "alt": "Balcão do Café Dalí" },
+      { "imagem": "img/interior-mesas-wide.jpg", "alt": "Área de mesas do Café Dalí" },
+      { "imagem": "img/interior-balcao.jpg", "alt": "Vitrine de doces do Café Dalí" },
+      { "imagem": "img/placa-pilar.jpg", "alt": "Fachada do Café Dalí" }
+    ]
+  },
+  "cta": {
+    "eyebrow": "Pronto para encomendar?",
+    "titulo": "Monte seu pedido agora",
+    "texto": "Tortas, docinhos e folhados para festas, eventos ou aquele mimo do fim de semana."
+  },
+  "footer": {
+    "tagline": "Tortas, docinhos e folhados artesanais, feitos sob encomenda em Florianópolis.",
+    "copyright": "© 2026 Café Dalí. Todos os direitos reservados."
+  }
+}

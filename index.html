@@ -28,17 +28,17 @@
   <section class="hero">
     <div class="container">
       <div class="hero-copy">
-        <span class="eyebrow">Encomendas artesanais</span>
-        <h1>Tortas, docinhos e folhados feitos com o toque surrealista do Café Dalí</h1>
-        <p>Receitas autorais, ingredientes selecionados e aquele capricho de confeitaria de bairro — pedidos com 48h de antecedência para retirada ou entrega em Florianópolis.</p>
+        <span class="eyebrow" data-site="hero.eyebrow">Encomendas artesanais</span>
+        <h1 data-site="hero.titulo">Tortas, docinhos e folhados feitos com o toque surrealista do Café Dalí</h1>
+        <p data-site="hero.subtitulo">Receitas autorais, ingredientes selecionados e aquele capricho de confeitaria de bairro — pedidos com 48h de antecedência para retirada ou entrega em Florianópolis.</p>
         <div class="hero-cta">
           <a href="encomendas.html" class="btn btn-primary">Ver catálogo de encomendas</a>
           <a href="#como-funciona" class="btn btn-outline-light">Como funciona</a>
         </div>
         <div class="hero-meta">
           <div>
-            <strong>Rua Lauro Linhares, 2055</strong>
-            Trindade, Florianópolis - SC
+            <strong data-site="endereco.linha1">Rua Lauro Linhares, 2055</strong>
+            <span data-site="endereco.linha2">Trindade, Florianópolis - SC</span>
           </div>
           <div>
             <strong>8h às 19h</strong>
@@ -51,7 +51,7 @@
         </div>
       </div>
       <div class="hero-art">
-        <img src="img/hero-dali.jpg" alt="Arte inspirada em Salvador Dalí, identidade visual do Café Dalí" />
+        <img data-site="hero.imagem" src="img/hero-dali.jpg" alt="Arte inspirada em Salvador Dalí, identidade visual do Café Dalí" />
       </div>
     </div>
   </section>
@@ -59,11 +59,11 @@
   <section class="section" id="como-funciona">
     <div class="container">
       <div class="section-header">
-        <span class="eyebrow">Como funciona</span>
-        <h2>Encomendar é simples</h2>
-        <p>Do catálogo até a retirada, em três passos.</p>
+        <span class="eyebrow" data-site="comoFunciona.eyebrow">Como funciona</span>
+        <h2 data-site="comoFunciona.titulo">Encomendar é simples</h2>
+        <p data-site="comoFunciona.subtitulo">Do catálogo até a retirada, em três passos.</p>
       </div>
-      <div class="steps">
+      <div class="steps" data-site-steps>
         <div class="step-card">
           <div class="step-num">1</div>
           <h3>Escolha seus produtos</h3>
@@ -86,11 +86,11 @@
   <section class="section section-alt">
     <div class="container">
       <div class="section-header">
-        <span class="eyebrow">Nosso espaço</span>
-        <h2>Um cantinho surrealista em Florianópolis</h2>
-        <p>Conheça um pouco do ambiente do Café Dalí, na Trindade.</p>
+        <span class="eyebrow" data-site="galeria.eyebrow">Nosso espaço</span>
+        <h2 data-site="galeria.titulo">Um cantinho surrealista em Florianópolis</h2>
+        <p data-site="galeria.subtitulo">Conheça um pouco do ambiente do Café Dalí, na Trindade.</p>
       </div>
-      <div class="gallery">
+      <div class="gallery" data-site-galeria>
         <a href="img/fachada-balcao.jpg" target="_blank"><img src="img/fachada-balcao.jpg" alt="Balcão do Café Dalí" /></a>
         <a href="img/interior-mesas-wide.jpg" target="_blank"><img src="img/interior-mesas-wide.jpg" alt="Área de mesas do Café Dalí" /></a>
         <a href="img/interior-balcao.jpg" target="_blank"><img src="img/interior-balcao.jpg" alt="Vitrine de doces do Café Dalí" /></a>
@@ -101,9 +101,9 @@
 
   <section class="section section-dark">
     <div class="container text-center">
-      <span class="eyebrow">Pronto para encomendar?</span>
-      <h2>Monte seu pedido agora</h2>
-      <p style="color:rgba(255,255,255,0.75); max-width:520px; margin:0 auto 28px;">Tortas, docinhos e folhados para festas, eventos ou aquele mimo do fim de semana.</p>
+      <span class="eyebrow" data-site="cta.eyebrow">Pronto para encomendar?</span>
+      <h2 data-site="cta.titulo">Monte seu pedido agora</h2>
+      <p style="color:rgba(255,255,255,0.75); max-width:520px; margin:0 auto 28px;" data-site="cta.texto">Tortas, docinhos e folhados para festas, eventos ou aquele mimo do fim de semana.</p>
       <a href="encomendas.html" class="btn btn-primary">Ver catálogo</a>
     </div>
   </section>
@@ -117,18 +117,18 @@
       <div class="gallery" style="grid-template-columns: repeat(3, 1fr);">
         <div class="step-card">
           <h3>📍 Endereço</h3>
-          <p>Rua Lauro Linhares, 2055<br />Trindade, Florianópolis - SC<br />88036-003</p>
+          <p data-site-endereco-html>Rua Lauro Linhares, 2055<br />Trindade, Florianópolis - SC<br />88036-003</p>
         </div>
         <div class="step-card">
           <h3>🕒 Horário</h3>
-          <p>Todos os dias, das 8h às 19h</p>
+          <p data-site="horario.texto">Todos os dias, das 8h às 19h</p>
         </div>
         <div class="step-card">
           <h3>💬 Contato</h3>
           <p>
-            <a href="https://wa.me/5548988410415" target="_blank">WhatsApp: (48) 98841-0415</a><br />
-            <a href="mailto:contato@cafeteriadali.com.br">contato@cafeteriadali.com.br</a><br />
-            <a href="https://instagram.com/dalicafeteria" target="_blank">@dalicafeteria</a>
+            <a href="https://wa.me/5548988410415" target="_blank" data-site-whatsapp-link data-site-whatsapp-text-prefix>WhatsApp: <span data-site-whatsapp-text>(48) 98841-0415</span></a><br />
+            <a href="mailto:contato@cafeteriadali.com.br" data-site-email-link data-site-email-text>contato@cafeteriadali.com.br</a><br />
+            <a href="https://instagram.com/dalicafeteria" target="_blank" data-site-instagram-link data-site-instagram-text>@dalicafeteria</a>
           </p>
         </div>
       </div>
@@ -140,26 +140,27 @@
       <div class="footer-grid">
         <div>
           <img src="img/logo.png" alt="Café Dalí" />
-          <p>Tortas, docinhos e folhados artesanais, feitos sob encomenda em Florianópolis.</p>
+          <p data-site="footer.tagline">Tortas, docinhos e folhados artesanais, feitos sob encomenda em Florianópolis.</p>
         </div>
         <div>
           <h4>Contato</h4>
-          <a href="https://wa.me/5548988410415" target="_blank">WhatsApp (48) 98841-0415</a>
-          <a href="mailto:contato@cafeteriadali.com.br">contato@cafeteriadali.com.br</a>
-          <a href="https://instagram.com/dalicafeteria" target="_blank">@dalicafeteria</a>
+          <a href="https://wa.me/5548988410415" target="_blank" data-site-whatsapp-link>WhatsApp <span data-site-whatsapp-text>(48) 98841-0415</span></a>
+          <a href="mailto:contato@cafeteriadali.com.br" data-site-email-link data-site-email-text>contato@cafeteriadali.com.br</a>
+          <a href="https://instagram.com/dalicafeteria" target="_blank" data-site-instagram-link data-site-instagram-text>@dalicafeteria</a>
         </div>
         <div>
           <h4>Onde estamos</h4>
-          <p>Rua Lauro Linhares, 2055<br />Trindade, Florianópolis - SC<br />88036-003</p>
-          <p>Todos os dias, 8h às 19h</p>
+          <p data-site-endereco-html>Rua Lauro Linhares, 2055<br />Trindade, Florianópolis - SC<br />88036-003</p>
+          <p data-site="horario.texto">Todos os dias, 8h às 19h</p>
         </div>
       </div>
-      <div class="footer-bottom">© 2026 Café Dalí. Todos os direitos reservados.</div>
+      <div class="footer-bottom" data-site="footer.copyright">© 2026 Café Dalí. Todos os direitos reservados.</div>
     </div>
   </footer>
 
-  <a class="whatsapp-fab" href="https://wa.me/5548988410415" target="_blank" aria-label="Falar no WhatsApp">💬</a>
+  <a class="whatsapp-fab" href="https://wa.me/5548988410415" target="_blank" aria-label="Falar no WhatsApp" data-site-whatsapp-link>💬</a>
 
+  <script src="js/site-content-loader.js"></script>
   <script src="js/catalogo-loader.js"></script>
   <script src="js/cart.js"></script>
 </body>

@@ -11,30 +11,43 @@ carrinho.html         → carrinho + formulário de pedido + pagamento
 sucesso.html          → retorno de pagamento aprovado
 pendente.html         → retorno de pagamento pendente (pix/boleto em análise)
 erro.html             → retorno de pagamento não concluído
-admin.html            → Painel de Produtos (uso interno, edição ao vivo)
+admin.html            → Painel administrativo (uso interno, edição ao vivo)
 css/style.css         → todo o estilo do site
 js/catalogo-loader.js → busca o catálogo de produtos no servidor (ao vivo)
+js/site-content-loader.js → busca o conteúdo do site (hero, contato, galeria etc.) no servidor
 js/cart.js             → lógica do carrinho (compartilhada)
 js/catalogo.js         → renderização da página de encomendas
 js/checkout.js         → lógica do carrinho/checkout
-js/admin.js            → lógica do Painel de Produtos
+js/admin.js            → lógica do Painel administrativo (produtos + conteúdo do site)
 netlify/functions/get-products.js   → devolve o catálogo atual (lido do Netlify Blobs)
 netlify/functions/save-products.js  → salva o catálogo editado (protegido por senha)
 netlify/functions/default-catalogo.json → catálogo de exemplo (só usado antes do 1º salvamento)
+netlify/functions/get-site-content.js  → devolve o conteúdo do site atual (lido do Netlify Blobs)
+netlify/functions/save-site-content.js → salva o conteúdo do site editado (protegido por senha)
+netlify/functions/default-site-content.json → conteúdo de exemplo (só usado antes do 1º salvamento)
 netlify/functions/create-preference.js  → cria o pagamento no Mercado Pago
 netlify.toml           → configuração da Netlify
 package.json           → dependência usada pelas funções (Netlify Blobs)
 img/                    → logo e fotos do café
 ```
 
-## 1. Editar os produtos (ao vivo, sem baixar nem publicar nada)
+## 1. Editar o site (ao vivo, sem baixar nem publicar nada)
 
-Abra `admin.html` no site publicado (ex: `https://cafe-dali.netlify.app/admin.html`). É uma página de uso interno — não aparece nos menus para os clientes.
+Abra `admin.html` no site publicado (ex: `https://cafe-dali.netlify.app/admin.html`). É uma página de uso interno — não aparece nos menus para os clientes. Ela tem duas partes, cada uma com seu próprio botão de salvar:
 
-Nela você edita nome, descrição, preço e unidade de cada produto, adiciona ou remove produtos e até categorias inteiras, sem escrever código. Ao terminar:
+**Produtos** — nome, descrição, preço, unidade e foto de cada item do catálogo de encomendas; adicionar/remover produtos e categorias inteiras.
 
-1. Digite sua **senha do painel** no campo indicado.
-2. Clique em **"Salvar alterações no site"**.
+**Conteúdo do site** — tudo que aparece na página inicial e no rodapé/contato de todas as páginas, organizado em blocos separados:
+- Contato e endereço (WhatsApp, e-mail, Instagram, endereço, horário — usado no cabeçalho, rodapé e botões de WhatsApp em todo o site)
+- Página inicial / hero (frase, título, texto e foto principal do topo do site)
+- Como funciona (os 3 passos explicando o processo de encomenda)
+- Galeria de fotos (as fotos do espaço do café — dá para adicionar, trocar ou remover fotos)
+- Rodapé (texto abaixo do logo e o aviso de direitos autorais)
+
+Para salvar qualquer uma das duas partes:
+
+1. Digite sua **senha do painel** no campo do topo (vale para as duas partes).
+2. Clique no botão **"Salvar"** da parte que você editou (Produtos ou Conteúdo do site).
 
 Pronto — a mudança já vale no site na mesma hora, para todo mundo, sem precisar baixar arquivo nem publicar de novo. A senha é definida por você numa variável de ambiente na Netlify (`ADMIN_PASSWORD`) — veja o passo 3 abaixo.
 
@@ -81,9 +94,9 @@ O site foi migrado para publicação automática: em vez de arrastar a pasta pro
 - Para mexer em **produtos** (preço, nome, adicionar/remover item): use o Painel de Produtos (`admin.html`) — não precisa mexer no GitHub.
 - Para qualquer **outra mudança no site** (layout, textos, nova seção, correções): me peça aqui no chat, eu ajusto os arquivos, e você sobe a atualização arrastando os arquivos alterados de novo para "Add file > Upload files" no mesmo repositório do GitHub — a Netlify publica sozinha em seguida.
 
-## 5. Número de WhatsApp
+## 5. Número de WhatsApp, e-mail, Instagram, endereço e horário
 
-O número usado nos links de WhatsApp é `5548988410415` — (48) 98841-0415, já com o 9 — e está em `js/checkout.js` (constante `WHATSAPP_NUMBER`) e também espalhado nas páginas HTML (`wa.me/...`). Se o número mudar, é só pedir aqui no chat que eu atualizo em todos os lugares.
+Todos esses dados agora são editados direto no Painel administrativo (`admin.html`, aba "Conteúdo do site" > "Contato e endereço") e valem automaticamente em todas as páginas (cabeçalho, rodapé, botões de WhatsApp). Não precisa mais mexer no código nem me pedir para trocar — só atualizar por lá e salvar.
 
 ## 6. Regras de encomenda
 

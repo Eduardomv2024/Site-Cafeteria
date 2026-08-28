@@ -2,7 +2,7 @@
    Café Dalí — Página do carrinho / checkout
    ========================================================================== */
 
-const WHATSAPP_NUMBER = "5548988410415"; // 55 + DDD + número. Confirme/ajuste este número.
+const WHATSAPP_NUMBER = "5548988410415"; // valor padrão/reserva — o número de verdade vem do Painel de Produtos > Conteúdo do site
 const MIN_HOURS_AHEAD = 48;
 
 function cartItemRow(item) {
@@ -183,7 +183,8 @@ function whatsappFallback(form, reason) {
   if (reason) {
     showStatus(reason, "info");
   }
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+  const numero = (typeof SITE_CONTENT !== "undefined" && SITE_CONTENT.contato && SITE_CONTENT.contato.whatsapp) || WHATSAPP_NUMBER;
+  const url = `https://wa.me/${numero}?text=${encodeURIComponent(text)}`;
   window.open(url, "_blank");
 }
 

@@ -50,26 +50,27 @@
       <div class="footer-grid">
         <div>
           <img src="img/logo.png" alt="Café Dalí" />
-          <p>Tortas, docinhos e folhados artesanais, feitos sob encomenda em Florianópolis.</p>
+          <p data-site="footer.tagline">Tortas, docinhos e folhados artesanais, feitos sob encomenda em Florianópolis.</p>
         </div>
         <div>
           <h4>Contato</h4>
-          <a href="https://wa.me/5548988410415" target="_blank">WhatsApp (48) 98841-0415</a>
-          <a href="mailto:contato@cafeteriadali.com.br">contato@cafeteriadali.com.br</a>
-          <a href="https://instagram.com/dalicafeteria" target="_blank">@dalicafeteria</a>
+          <a href="https://wa.me/5548988410415" target="_blank" data-site-whatsapp-link>WhatsApp <span data-site-whatsapp-text>(48) 98841-0415</span></a>
+          <a href="mailto:contato@cafeteriadali.com.br" data-site-email-link data-site-email-text>contato@cafeteriadali.com.br</a>
+          <a href="https://instagram.com/dalicafeteria" target="_blank" data-site-instagram-link data-site-instagram-text>@dalicafeteria</a>
         </div>
         <div>
           <h4>Onde estamos</h4>
-          <p>Rua Lauro Linhares, 2055<br />Trindade, Florianópolis - SC<br />88036-003</p>
-          <p>Todos os dias, 8h às 19h</p>
+          <p data-site-endereco-html>Rua Lauro Linhares, 2055<br />Trindade, Florianópolis - SC<br />88036-003</p>
+          <p data-site="horario.texto">Todos os dias, 8h às 19h</p>
         </div>
       </div>
-      <div class="footer-bottom">© 2026 Café Dalí. Todos os direitos reservados.</div>
+      <div class="footer-bottom" data-site="footer.copyright">© 2026 Café Dalí. Todos os direitos reservados.</div>
     </div>
   </footer>
 
-  <a class="whatsapp-fab" href="https://wa.me/5548988410415" target="_blank" aria-label="Falar no WhatsApp">💬</a>
+  <a class="whatsapp-fab" href="https://wa.me/5548988410415" target="_blank" aria-label="Falar no WhatsApp" data-site-whatsapp-link>💬</a>
 
+  <script src="js/site-content-loader.js"></script>
   <script src="js/catalogo-loader.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/catalogo.js"></script>
