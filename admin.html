@@ -36,12 +36,37 @@
     .admin-cat-header .form-group { flex: 1; min-width: 200px; margin-bottom: 0; }
     .admin-item {
       display: grid;
-      grid-template-columns: 1.4fr 2fr 0.7fr 0.9fr auto;
+      grid-template-columns: 88px 1.3fr 1.8fr 0.65fr 0.8fr auto;
       gap: 10px;
       align-items: start;
       padding: 14px 0;
       border-top: 1px solid var(--color-border);
     }
+    .admin-img-cell { display: flex; flex-direction: column; gap: 4px; }
+    .admin-img-preview {
+      width: 72px;
+      height: 72px;
+      border-radius: 8px;
+      background: var(--color-cream-2);
+      border: 1.5px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .admin-img-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .admin-img-empty { font-size: 0.62rem; color: var(--color-text-muted); text-align: center; padding: 4px; }
+    .admin-img-btn, .admin-img-remove {
+      background: none;
+      border: 1px solid var(--color-border);
+      border-radius: 7px;
+      padding: 4px 6px;
+      font-size: 0.7rem;
+      cursor: pointer;
+      color: var(--color-text);
+      width: 72px;
+    }
+    .admin-img-remove { color: var(--color-red); border-color: var(--color-red); }
     .admin-item:first-of-type { border-top: none; }
     .admin-item input, .admin-item textarea {
       width: 100%;
