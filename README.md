@@ -19,6 +19,7 @@ js/cart.js             → lógica do carrinho (compartilhada)
 js/catalogo.js         → renderização da página de encomendas
 js/checkout.js         → lógica do carrinho/checkout
 js/admin.js            → lógica do Painel administrativo (produtos + conteúdo do site)
+netlify/functions/check-password.js → confere a senha do painel (só a tela de entrada, não salva nada)
 netlify/functions/get-products.js   → devolve o catálogo atual (lido do Netlify Blobs)
 netlify/functions/save-products.js  → salva o catálogo editado (protegido por senha)
 netlify/functions/default-catalogo.json → catálogo de exemplo (só usado antes do 1º salvamento)
@@ -33,7 +34,9 @@ img/                    → logo e fotos do café
 
 ## 1. Editar o site (ao vivo, sem baixar nem publicar nada)
 
-Abra `admin.html` no site publicado (ex: `https://cafe-dali.netlify.app/admin.html`). É uma página de uso interno — não aparece nos menus para os clientes. Ela tem duas partes, cada uma com seu próprio botão de salvar:
+Abra `admin.html` no site publicado (ex: `https://cafe-dali.netlify.app/admin.html`). É uma página de uso interno — não aparece nos menus para os clientes. Assim que a página abre, ela pede a **senha do painel**; sem a senha certa, ninguém vê nem edita nada. Uma vez digitada, a senha fica lembrada nesse navegador até clicar em "Sair" (no canto superior direito).
+
+Depois de entrar, o painel tem duas partes, cada uma com seu próprio botão de salvar:
 
 **Produtos** — nome, descrição, preço, unidade e foto de cada item do catálogo de encomendas; adicionar/remover produtos e categorias inteiras.
 
@@ -44,10 +47,7 @@ Abra `admin.html` no site publicado (ex: `https://cafe-dali.netlify.app/admin.ht
 - Galeria de fotos (as fotos do espaço do café — dá para adicionar, trocar ou remover fotos)
 - Rodapé (texto abaixo do logo e o aviso de direitos autorais)
 
-Para salvar qualquer uma das duas partes:
-
-1. Digite sua **senha do painel** no campo do topo (vale para as duas partes).
-2. Clique no botão **"Salvar"** da parte que você editou (Produtos ou Conteúdo do site).
+Para salvar qualquer uma das duas partes, basta clicar no botão **"Salvar"** da parte que você editou (Produtos ou Conteúdo do site) — não precisa digitar a senha de novo, ela já foi confirmada na entrada.
 
 Pronto — a mudança já vale no site na mesma hora, para todo mundo, sem precisar baixar arquivo nem publicar de novo. A senha é definida por você numa variável de ambiente na Netlify (`ADMIN_PASSWORD`) — veja o passo 3 abaixo.
 

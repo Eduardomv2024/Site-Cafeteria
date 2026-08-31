@@ -4,6 +4,94 @@
 
 let state = {}; // catálogo editável, carregado do servidor em loadState()
 
+/* ==========================================================================
+   Tela de bloqueio: esconde o painel inteiro até a senha certa ser digitada
+   ========================================================================== */
+
+const ADMIN_PW_STORAGE_KEY = "cafeDaliAdminPw";
+let panelUnlocked = false;
+
+function setLockStatus(msg) {
+  const el = document.getElementById("admin-lock-status");
+  if (el) el.textContent = msg || "";
+}
+
+async function verifyPassword(pw) {
+  const res = await fetch("/.netlify/functions/check-password", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "x-admin-password": pw },
+    body: "{}",
+  });
+  if (res.status === 200) return { ok: true };
+  const data = await res.json().catch(() => ({}));
+  return { ok: false, error: data.error || "Não foi possível confirmar a senha (status " + res.status + ")." };
+}
+
+function unlockPanel(pw) {
+  document.getElementById("admin-password").value = pw;
+  document.getElementById("admin-lock").hidden = true;
+  document.getElementById("admin-main").hidden = false;
+  if (!panelUnlocked) {
+    panelUnlocked = true;
+    loadState();
+    loadContentState();
+  }
+}
+
+async function tryUnlock(pw, opts) {
+  const silent = opts && opts.silent;
+  if (!silent) setLockStatus("Verificando...");
+  try {
+    const result = await verifyPassword(pw);
+    if (result.ok) {
+      try {
+        sessionStorage.setItem(ADMIN_PW_STORAGE_KEY, pw);
+      } catch (e) {}
+      setLockStatus("");
+      unlockPanel(pw);
+      return true;
+    }
+    if (!silent) {
+      setLockStatus(result.error);
+    } else {
+      try {
+        sessionStorage.removeItem(ADMIN_PW_STORAGE_KEY);
+      } catch (e) {}
+    }
+    return false;
+  } catch (err) {
+    if (!silent) setLockStatus("Não foi possível confirmar a senha agora. Verifique sua internet e tente de novo.");
+    return false;
+  }
+}
+
+document.getElementById("lock-submit").addEventListener("click", () => {
+  const pw = document.getElementById("lock-password").value;
+  if (!pw) {
+    setLockStatus("Digite a senha.");
+    return;
+  }
+  tryUnlock(pw);
+});
+document.getElementById("lock-password").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") document.getElementById("lock-submit").click();
+});
+document.getElementById("admin-logout").addEventListener("click", () => {
+  try {
+    sessionStorage.removeItem(ADMIN_PW_STORAGE_KEY);
+  } catch (e) {}
+  location.reload();
+});
+
+// se a senha já foi confirmada nesta aba (sessionStorage), entra sozinho sem pedir de novo
+(function initLock() {
+  let saved = "";
+  try {
+    saved = sessionStorage.getItem(ADMIN_PW_STORAGE_KEY) || "";
+  } catch (e) {}
+  if (saved) tryUnlock(saved, { silent: true });
+})();
+
 function slugify(text) {
   return (text || "")
     .toString()
@@ -335,8 +423,6 @@ function removeBlankItems(catalogo) {
   return { cleaned, skipped };
 }
 
-loadState();
-
 /* ==========================================================================
    Conteúdo do site (hero, contato, endereço, como funciona, galeria, rodapé)
    ========================================================================== */
@@ -608,5 +694,3 @@ document.getElementById("save-content-btn").addEventListener("click", async () =
     btn.textContent = "💾 Salvar conteúdo do site";
   }
 });
-
-loadContentState();

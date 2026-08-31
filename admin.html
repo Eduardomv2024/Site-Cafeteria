@@ -279,6 +279,47 @@
     .admin-foto-row input[type="text"] { width: 100%; padding: 9px 11px; border-radius: 8px; border: 1.5px solid var(--color-border); font-family: var(--font-sans); font-size: 0.88rem; }
     .admin-foto-row input[type="text"]:focus { outline: none; border-color: var(--color-red); }
     @media (max-width: 640px) { .admin-foto-row { grid-template-columns: 72px 1fr; } .admin-foto-row .admin-remove { grid-column: 2; justify-self: end; } }
+
+    /* Tela de bloqueio: cobre tudo até a senha certa ser digitada ---------- */
+    .admin-lock {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: var(--color-cream-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .admin-lock[hidden] { display: none; }
+    .admin-lock-box {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+    .admin-lock-box img { height: 40px; margin-bottom: 18px; }
+    .admin-lock-box h1 { font-size: 1.4rem; margin-bottom: 6px; }
+    .admin-lock-box p { color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 22px; }
+    .admin-lock-box .form-group { text-align: left; margin-bottom: 18px; }
+    .admin-lock-box .btn { width: 100%; }
+    .admin-lock-status { min-height: 1.2em; font-size: 0.86rem; color: var(--color-red); margin-top: 14px; }
+    .admin-toolbar-account { display: flex; align-items: center; gap: 12px; }
+    .admin-toolbar-logout {
+      background: none;
+      border: 1.5px solid var(--color-border);
+      color: var(--color-text-muted);
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .admin-toolbar-logout:hover { border-color: var(--color-red); color: var(--color-red); }
   </style>
 </head>
 <body>
@@ -295,6 +336,21 @@
     </div>
   </header>
 
+  <div class="admin-lock" id="admin-lock">
+    <div class="admin-lock-box">
+      <img src="img/logo.png" alt="Café Dalí" />
+      <h1>Painel administrativo</h1>
+      <p>Digite a senha para ver e editar o site.</p>
+      <div class="form-group">
+        <label for="lock-password">Senha do painel</label>
+        <input type="password" id="lock-password" placeholder="Digite a senha" autocomplete="current-password" />
+      </div>
+      <button class="btn btn-primary" id="lock-submit" type="button">Entrar</button>
+      <p class="admin-lock-status" id="admin-lock-status"></p>
+    </div>
+  </div>
+
+  <div id="admin-main" hidden>
   <div class="admin-toolbar">
     <div class="admin-toolbar-title">
       <strong>Painel administrativo</strong>
@@ -304,9 +360,9 @@
       <a href="#bloco-produtos">🛒 Produtos</a>
       <a href="#bloco-conteudo">🌐 Conteúdo do site</a>
     </nav>
-    <div class="admin-toolbar-password">
-      <label for="admin-password">Senha do painel</label>
-      <input type="password" id="admin-password" placeholder="Digite a senha" autocomplete="current-password" />
+    <div class="admin-toolbar-account">
+      <input type="hidden" id="admin-password" />
+      <button type="button" class="admin-toolbar-logout" id="admin-logout">Sair</button>
     </div>
   </div>
 
@@ -322,7 +378,7 @@
       <ol>
         <li>Este painel tem duas partes, cada uma com seu próprio botão de salvar: <strong>Produtos</strong> (o catálogo de encomendas) e <strong>Conteúdo do site</strong> (textos e fotos da página inicial, contato, endereço, etc.).</li>
         <li>Em campos de foto, escolha uma imagem — pode tirar direto do celular. Qualquer tamanho ou formato serve (JPG, PNG, etc.), o site redimensiona e comprime sozinho. Fotos na horizontal ou quadradas costumam ficar melhores.</li>
-        <li>Digite sua senha do painel no topo da página (é a mesma para as duas partes).</li>
+        <li>A senha do painel é pedida assim que você abre esta página, e vale para as duas partes. Ela fica lembrada neste navegador até você clicar em "Sair", no canto superior direito.</li>
         <li>Edite o que quiser e clique no botão "Salvar" da parte correspondente — pronto, já vale no site na mesma hora, sem precisar publicar nada de novo.</li>
       </ol>
     </div>
@@ -471,6 +527,7 @@
         <span class="admin-status" id="admin-status-content"></span>
       </div>
     </section>
+  </div>
   </div>
 
   <script src="js/cart.js"></script>
