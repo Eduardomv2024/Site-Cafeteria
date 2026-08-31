@@ -8,24 +8,113 @@
   <link rel="icon" href="img/favicon-32.png" sizes="32x32" />
   <link rel="stylesheet" href="css/style.css" />
   <style>
-    .admin-wrap { max-width: 920px; margin: 0 auto; padding: 40px 24px 100px; }
-    .admin-steps {
-      background: var(--color-cream-2);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      padding: 22px 26px;
-      margin-bottom: 32px;
-      font-size: 0.94rem;
+    body { background: var(--color-cream-2); }
+    .admin-wrap { max-width: 960px; margin: 0 auto; padding: 0 24px 100px; }
+
+    /* Barra fixa no topo: sempre visível, com a senha e navegação rápida ---- */
+    .admin-toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(250, 245, 236, 0.94);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 14px 24px;
+      margin: 0 -24px 40px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
     }
-    .admin-steps ol { margin: 10px 0 0; padding-left: 20px; }
-    .admin-steps li { margin-bottom: 6px; }
+    .admin-toolbar-title { display: flex; align-items: baseline; gap: 10px; margin-right: auto; }
+    .admin-toolbar-title strong { font-family: var(--font-serif); font-size: 1.15rem; color: var(--color-black); }
+    .admin-toolbar-title span { font-size: 0.78rem; color: var(--color-text-muted); }
+    .admin-toolbar-nav { display: flex; gap: 8px; }
+    .admin-toolbar-nav a {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--color-text);
+      text-decoration: none;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1.5px solid var(--color-border);
+      background: #fff;
+      white-space: nowrap;
+    }
+    .admin-toolbar-nav a:hover { border-color: var(--color-red); color: var(--color-red); }
+    .admin-toolbar-password { display: flex; align-items: center; gap: 10px; }
+    .admin-toolbar-password label { font-size: 0.78rem; font-weight: 600; white-space: nowrap; }
+    .admin-toolbar-password input {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--color-border);
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      width: 150px;
+    }
+    .admin-toolbar-password input:focus { outline: none; border-color: var(--color-red); }
+    @media (max-width: 760px) {
+      .admin-toolbar { margin: 0 -16px 32px; padding: 12px 16px; }
+      .admin-toolbar-title { width: 100%; margin-right: 0; }
+      .admin-toolbar-nav { order: 3; width: 100%; }
+    }
+
+    .admin-intro { margin-bottom: 28px; }
+    .admin-intro h1 { margin-bottom: 6px; }
+    .admin-steps {
+      background: #fff;
+      border-left: 4px solid var(--color-red);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      box-shadow: var(--shadow-sm);
+      padding: 20px 26px;
+      margin-bottom: 40px;
+      font-size: 0.9rem;
+    }
+    .admin-steps strong.admin-steps-title { font-family: var(--font-serif); font-size: 1rem; display: block; margin-bottom: 8px; color: var(--color-black); }
+    .admin-steps ol { margin: 0; padding-left: 20px; }
+    .admin-steps li { margin-bottom: 8px; line-height: 1.5; }
+    .admin-steps li:last-child { margin-bottom: 0; }
+
+    .admin-block { margin-bottom: 60px; scroll-margin-top: 90px; }
+    .admin-block-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--color-black);
+      padding-bottom: 14px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid var(--color-black);
+    }
+    .admin-block-title .admin-block-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--color-red);
+      color: #fff;
+      font-size: 1.05rem;
+      flex-shrink: 0;
+    }
+
     .admin-cat {
       background: #fff;
       border: 1px solid var(--color-border);
       border-radius: var(--radius);
-      padding: 24px;
-      margin-bottom: 28px;
+      box-shadow: var(--shadow-sm);
+      padding: 26px 28px;
+      margin-bottom: 24px;
     }
+    .admin-cat h3 {
+      font-family: var(--font-serif);
+      font-size: 1.08rem;
+      color: var(--color-black);
+      margin-bottom: 4px;
+    }
+    .admin-cat > p.admin-cat-hint { color: var(--color-text-muted); font-size: 0.84rem; margin-bottom: 18px; }
     .admin-cat-header {
       display: flex;
       gap: 14px;
@@ -37,16 +126,16 @@
     .admin-item {
       display: grid;
       grid-template-columns: 88px 1.3fr 1.8fr 0.65fr 0.8fr auto;
-      gap: 10px;
+      gap: 14px;
       align-items: start;
-      padding: 14px 0;
+      padding: 18px 0;
       border-top: 1px solid var(--color-border);
     }
-    .admin-img-cell { display: flex; flex-direction: column; gap: 4px; }
+    .admin-img-cell { display: flex; flex-direction: column; gap: 6px; }
     .admin-img-preview {
       width: 72px;
       height: 72px;
-      border-radius: 8px;
+      border-radius: 10px;
       background: var(--color-cream-2);
       border: 1.5px solid var(--color-border);
       display: flex;
@@ -57,18 +146,21 @@
     .admin-img-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .admin-img-empty { font-size: 0.62rem; color: var(--color-text-muted); text-align: center; padding: 4px; }
     .admin-img-btn, .admin-img-remove {
-      background: none;
-      border: 1px solid var(--color-border);
+      background: #fff;
+      border: 1.5px solid var(--color-border);
       border-radius: 7px;
-      padding: 4px 6px;
+      padding: 5px 6px;
       font-size: 0.7rem;
+      font-weight: 600;
       cursor: pointer;
       color: var(--color-text);
       width: 72px;
     }
+    .admin-img-btn:hover { border-color: var(--color-black); }
     .admin-img-remove { color: var(--color-red); border-color: var(--color-red); }
+    .admin-img-remove:hover { background: var(--color-red); color: #fff; }
     .admin-img-hint { font-size: 0.62rem; color: var(--color-text-muted); text-align: center; line-height: 1.2; }
-    .admin-item:first-of-type { border-top: none; }
+    .admin-item:first-of-type { border-top: none; padding-top: 4px; }
     .admin-item input, .admin-item textarea {
       width: 100%;
       padding: 9px 11px;
@@ -77,114 +169,115 @@
       font-family: var(--font-sans);
       font-size: 0.88rem;
     }
+    .admin-item input:focus, .admin-item textarea:focus { outline: none; border-color: var(--color-red); }
     .admin-item textarea { resize: vertical; min-height: 40px; }
     .admin-remove {
       background: none;
-      border: none;
+      border: 1.5px solid transparent;
       color: var(--color-red);
       cursor: pointer;
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       line-height: 1;
-      padding: 6px;
+      padding: 7px 10px;
+      border-radius: 50%;
     }
+    .admin-remove:hover { background: var(--color-red); color: #fff; }
     .admin-col-label {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
       color: var(--color-text-muted);
       margin-bottom: 4px;
       display: block;
     }
     .admin-add-btn {
-      margin-top: 14px;
-      background: none;
-      border: 1.5px dashed var(--color-border);
+      margin-top: 16px;
+      background: var(--color-cream-2);
+      border: 1.5px dashed var(--color-wood);
       color: var(--color-text);
-      padding: 10px 16px;
+      padding: 12px 16px;
       border-radius: 9px;
       cursor: pointer;
       font-weight: 600;
       font-size: 0.88rem;
       width: 100%;
     }
-    .admin-add-btn:hover { background: var(--color-cream-2); }
-    .admin-actions {
-      position: sticky;
-      bottom: 0;
-      background: var(--color-cream);
-      border-top: 1px solid var(--color-border);
-      padding: 18px 0;
-      margin-top: 10px;
+    .admin-add-btn:hover { background: #fff; border-color: var(--color-red); color: var(--color-red); }
+    .admin-actions, .admin-actions-static {
       display: flex;
-      gap: 14px;
+      gap: 16px;
       align-items: center;
       flex-wrap: wrap;
     }
-    .admin-status { font-size: 0.88rem; color: var(--color-text-muted); }
+    .admin-actions {
+      position: sticky;
+      bottom: 16px;
+      background: #fff;
+      border: 1.5px solid var(--color-border);
+      box-shadow: var(--shadow);
+      border-radius: 999px;
+      padding: 12px 24px;
+      margin-top: 18px;
+    }
+    .admin-actions-static { padding: 6px 4px 0; }
+    .admin-status { font-size: 0.86rem; color: var(--color-text-muted); }
     .admin-cat-remove {
       background: none;
-      border: 1px solid var(--color-border);
+      border: 1.5px solid var(--color-border);
       color: var(--color-text-muted);
       border-radius: 8px;
       padding: 8px 12px;
       cursor: pointer;
       font-size: 0.82rem;
+      font-weight: 600;
     }
     .admin-cat-remove:hover { color: var(--color-red); border-color: var(--color-red); }
     @media (max-width: 760px) {
       .admin-item { grid-template-columns: 1fr; }
       .admin-remove { justify-self: end; }
+      .admin-actions { border-radius: var(--radius); }
     }
 
-    .admin-password-bar {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-      background: #fff;
-      border: 1.5px solid var(--color-border);
-      border-radius: var(--radius);
-      padding: 16px 20px;
-      margin-bottom: 36px;
-    }
-    .admin-password-bar .form-group { margin-bottom: 0; min-width: 220px; }
-    .admin-block { margin-bottom: 52px; }
-    .admin-block-title { margin-bottom: 18px; }
     .admin-content-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 6px;
+      gap: 18px;
+      margin-bottom: 4px;
     }
     .admin-content-grid .form-group { margin-bottom: 0; }
     .admin-content-grid .form-group.full { grid-column: 1 / -1; }
-    .admin-content-grid textarea { width: 100%; min-height: 56px; resize: vertical; padding: 9px 11px; border-radius: 8px; border: 1.5px solid var(--color-border); font-family: var(--font-sans); font-size: 0.88rem; }
-    @media (max-width: 640px) { .admin-content-grid { grid-template-columns: 1fr; } }
-    .admin-actions-static {
-      display: flex;
-      gap: 14px;
-      align-items: center;
-      flex-wrap: wrap;
-      padding: 18px 0 6px;
+    .admin-content-grid label { display: block; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; color: var(--color-text-muted); margin-bottom: 6px; }
+    .admin-content-grid input, .admin-content-grid textarea {
+      width: 100%; padding: 10px 12px; border-radius: 8px; border: 1.5px solid var(--color-border);
+      font-family: var(--font-sans); font-size: 0.9rem;
     }
+    .admin-content-grid input:focus, .admin-content-grid textarea:focus { outline: none; border-color: var(--color-red); }
+    .admin-content-grid textarea { min-height: 56px; resize: vertical; }
+    @media (max-width: 640px) { .admin-content-grid { grid-template-columns: 1fr; } }
+
     .admin-passo-row {
       display: grid;
       grid-template-columns: 1fr 2fr;
-      gap: 12px;
-      padding: 12px 0;
+      gap: 14px;
+      padding: 16px 0;
       border-top: 1px solid var(--color-border);
     }
-    .admin-passo-row:first-of-type { border-top: none; }
+    .admin-passo-row:first-of-type { border-top: none; padding-top: 4px; }
+    .admin-passo-row input { width: 100%; padding: 9px 11px; border-radius: 8px; border: 1.5px solid var(--color-border); font-family: var(--font-sans); font-size: 0.88rem; }
+    .admin-passo-row input:focus { outline: none; border-color: var(--color-red); }
     @media (max-width: 640px) { .admin-passo-row { grid-template-columns: 1fr; } }
+
     .admin-foto-row {
       display: grid;
       grid-template-columns: 88px 1fr auto;
-      gap: 12px;
+      gap: 14px;
       align-items: start;
-      padding: 12px 0;
+      padding: 16px 0;
       border-top: 1px solid var(--color-border);
     }
-    .admin-foto-row:first-of-type { border-top: none; }
+    .admin-foto-row:first-of-type { border-top: none; padding-top: 4px; }
+    .admin-foto-row input[type="text"] { width: 100%; padding: 9px 11px; border-radius: 8px; border: 1.5px solid var(--color-border); font-family: var(--font-sans); font-size: 0.88rem; }
+    .admin-foto-row input[type="text"]:focus { outline: none; border-color: var(--color-red); }
     @media (max-width: 640px) { .admin-foto-row { grid-template-columns: 72px 1fr; } .admin-foto-row .admin-remove { grid-column: 2; justify-self: end; } }
   </style>
 </head>
@@ -202,31 +295,40 @@
     </div>
   </header>
 
+  <div class="admin-toolbar">
+    <div class="admin-toolbar-title">
+      <strong>Painel administrativo</strong>
+      <span>Café Dalí — uso interno</span>
+    </div>
+    <nav class="admin-toolbar-nav">
+      <a href="#bloco-produtos">🛒 Produtos</a>
+      <a href="#bloco-conteudo">🌐 Conteúdo do site</a>
+    </nav>
+    <div class="admin-toolbar-password">
+      <label for="admin-password">Senha do painel</label>
+      <input type="password" id="admin-password" placeholder="Digite a senha" autocomplete="current-password" />
+    </div>
+  </div>
+
   <div class="admin-wrap">
-    <span class="eyebrow">Uso interno</span>
-    <h1>Painel administrativo</h1>
-    <p style="color:var(--color-text-muted);">Edite os produtos e o conteúdo do site aqui. Essa página não aparece para os clientes.</p>
+    <div class="admin-intro">
+      <span class="eyebrow">Uso interno</span>
+      <h1>Editar o site</h1>
+      <p style="color:var(--color-text-muted);">Edite os produtos e o conteúdo do site aqui. Essa página não aparece para os clientes.</p>
+    </div>
 
     <div class="admin-steps">
-      <strong>Como usar (sem precisar programar):</strong>
+      <strong class="admin-steps-title">Como usar (sem precisar programar)</strong>
       <ol>
         <li>Este painel tem duas partes, cada uma com seu próprio botão de salvar: <strong>Produtos</strong> (o catálogo de encomendas) e <strong>Conteúdo do site</strong> (textos e fotos da página inicial, contato, endereço, etc.).</li>
         <li>Em campos de foto, escolha uma imagem — pode tirar direto do celular. Qualquer tamanho ou formato serve (JPG, PNG, etc.), o site redimensiona e comprime sozinho. Fotos na horizontal ou quadradas costumam ficar melhores.</li>
-        <li>Digite sua senha do painel logo abaixo (é a mesma para as duas partes).</li>
+        <li>Digite sua senha do painel no topo da página (é a mesma para as duas partes).</li>
         <li>Edite o que quiser e clique no botão "Salvar" da parte correspondente — pronto, já vale no site na mesma hora, sem precisar publicar nada de novo.</li>
       </ol>
     </div>
 
-    <div class="admin-password-bar">
-      <div class="form-group">
-        <label for="admin-password">Senha do painel</label>
-        <input type="password" id="admin-password" placeholder="Digite a senha" autocomplete="current-password" />
-      </div>
-      <span class="admin-status">Vale para salvar tanto os produtos quanto o conteúdo do site, abaixo.</span>
-    </div>
-
-    <section class="admin-block">
-      <h2 class="admin-block-title">🛒 Produtos</h2>
+    <section class="admin-block" id="bloco-produtos">
+      <h2 class="admin-block-title"><span class="admin-block-icon">🛒</span> Produtos</h2>
 
       <div id="categories">
         <p class="admin-status">Carregando produtos...</p>
@@ -240,12 +342,12 @@
       </div>
     </section>
 
-    <section class="admin-block">
-      <h2 class="admin-block-title">🌐 Conteúdo do site</h2>
+    <section class="admin-block" id="bloco-conteudo">
+      <h2 class="admin-block-title"><span class="admin-block-icon">🌐</span> Conteúdo do site</h2>
 
       <div class="admin-cat">
         <h3>Contato e endereço</h3>
-        <p style="color:var(--color-text-muted); font-size:0.85rem; margin-top:-8px;">Usado no cabeçalho, rodapé e botões de WhatsApp de todas as páginas.</p>
+        <p class="admin-cat-hint">Usado no cabeçalho, rodapé e botões de WhatsApp de todas as páginas.</p>
         <div class="admin-content-grid">
           <div class="form-group">
             <label>WhatsApp (só números, com DDD e o 9)</label>
